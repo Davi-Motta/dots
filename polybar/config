@@ -1,0 +1,125 @@
+[colors]
+background = #FF1a1b26
+foreground = #FFa9b1d6
+#alert = #
+#volume-min = #
+#volume-med = #
+#volume-max = #
+
+[bar/mybar]
+
+enable-ipc = true
+
+override-redirect = false
+#radius = 12.5
+bottom = false
+widith = 100%
+height = 30
+
+background = ${colors.background}
+forefround = ${colors.foreground}
+
+font-0 = mononoki Nerd Font:size=12
+
+modules-left = workspaces
+modules-center = spotify spotify-prev spotify-play-pause spotify-next
+modules-right = date power
+
+[module/workspaces]
+type = internal/i3
+pin-workspaces = false
+enable-click = true
+enable-scroll = true
+format-padding = 1
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;﬏
+ws-icon-3 = 4;ﱘ
+ws-icon-4 = 5;ﭮ
+
+ws-icon-default = wspc
+
+format = <label-state>
+format-background = ${color.shade2}
+
+label-focused = %index% %icon%
+label-focused-padding = 1
+label-focused-foreground = ${color.acolor}
+
+label-unfocused = %index% %icon%
+label-unfocused-padding = 1
+label-unfocused-foreground = ${color.coccupied}
+
+label-visible = %icon%
+label-visible-padding = 1
+label-visible-foreground = ${color.acolor}
+
+label-urgent = %icon%
+label-urgent-padding = 1
+label-urgent-foreground = ${color.curgent}
+
+
+[module/power]
+type = internal/battery
+full-at = 99
+battery = BAT0
+adapter = ADP1
+poll-interval = 5
+time-format = %H:%M
+
+format-charging =    <ramp-capacity>  <label-charging>
+format-discharging = <ramp-capacity>  <label-discharging>
+format-full = <ramp-capacity>  <label-full>
+
+label-full = %percentage%% ‎ ‎
+label-charging =  %percentage%% ‎ ‎
+label-discharging = %percentage%% ‎ ‎
+
+ramp-capacity-0 =  
+ramp-capacity-1 =  
+ramp-capacity-2 =  
+ramp-capacity-3 =  
+ramp-capacity-4 =  
+
+# Spotify modules yoinked from https://github.com/PrayagS/polybar-spotify
+#
+# Depends on:
+# 	zscroll https://github.com/noctuid/zscroll#installation
+# 	playerctl https://github.com/altdesktop/playerctl#installing
+
+[module/spotify]
+type = custom/script
+tail = true
+; prefix symbol is shown before the text
+format-prefix = "  "
+format = <label>
+exec = ~/.config/polybar/scripts/scroll_spotify_status.sh
+
+[module/spotify-prev]
+type = custom/script
+exec = echo "  "
+format = <label>
+click-left = playerctl previous -p spotify
+
+[module/spotify-play-pause]
+type = custom/ipc
+hook-0 = echo "  "
+hook-1 = echo "  "
+initial = 1
+click-left = playerctl play-pause -p spotify
+
+[module/spotify-next]
+type = custom/script
+exec = echo "  "
+format = <label>
+click-left = playerctl next -p spotify
+
+[module/date]
+type = internal/date
+
+interval = 1.0
+format =  <label>
+label =  %time%|%date% ‎ ‎
+date = %a %d/%b/%Y
+time = %H:%M

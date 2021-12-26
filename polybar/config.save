@@ -1,0 +1,45 @@
+[colors]
+background = #1a1b26
+foreground = #a9b1d6
+#alert = #
+#volume-min = #
+#volume-med = #
+#volume-max = #
+
+[bar/test]
+
+override-redirect = false
+#radius = 12.5
+bottom = false
+widith = 100%
+height = 30
+
+background = ${colors.background}
+forefround = ${colors.foreground}
+
+font-0 = mononoki Nerd Font:size=12
+
+modules-left = workspaces
+modules-right = power
+[module/workspaces]
+type = internal/i3
+
+
+[module/power]
+type = internal/battery
+full-at = 99
+battery = BAT0
+adapter = ADP1
+poll-interval = 5
+
+format-charging = <ramp-capacity><label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+
+label-full = Fully charged
+label-charging = Charging %percentage%%
+label-discharging = Discharging %percentage%%
+
+ramp-capacity-0 = ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
